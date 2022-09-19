@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32611.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelImporterToSQL", "ExcelImporterToSQL\ExcelImporterToSQL.csproj", "{9D1E41A6-07B9-4FF8-B487-B4A44EF84080}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlFileImporter", "SqlFileImporter\SqlFileImporter.csproj", "{86F68EB0-82A3-4A21-9988-0DDC26A8D965}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D1E41A6-07B9-4FF8-B487-B4A44EF84080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D1E41A6-07B9-4FF8-B487-B4A44EF84080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D1E41A6-07B9-4FF8-B487-B4A44EF84080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D1E41A6-07B9-4FF8-B487-B4A44EF84080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F68EB0-82A3-4A21-9988-0DDC26A8D965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F68EB0-82A3-4A21-9988-0DDC26A8D965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F68EB0-82A3-4A21-9988-0DDC26A8D965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F68EB0-82A3-4A21-9988-0DDC26A8D965}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2742454E-6E0F-4678-97A6-730F0395C252}
+	EndGlobalSection
+EndGlobal
