@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32611.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelImporterToSQL", "ExcelImporterToSQL\ExcelImporterToSQL.csproj", "{9D1E41A6-07B9-4FF8-B487-B4A44EF84080}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "ExcelImporterToSQL\Sample.csproj", "{9D1E41A6-07B9-4FF8-B487-B4A44EF84080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlFileImporter", "SqlFileImporter\SqlFileImporter.csproj", "{86F68EB0-82A3-4A21-9988-0DDC26A8D965}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlFileImporter", "SqlFileImporter\SqlFileImporter.csproj", "{86F68EB0-82A3-4A21-9988-0DDC26A8D965}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
