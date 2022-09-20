@@ -49,11 +49,6 @@ namespace SqlFileImporter.Classes
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             excel = new ExcelPackage(this.fileName);
             workSheet = excel.Workbook.Worksheets.First();
-            //countColumns = workSheet.Dimension.End.Column;
-            //int count_rows = workSheet.Dimension.End.Row;
-
-
-
         }
     }
 }

@@ -13,6 +13,9 @@ namespace SqlFileImporter.Classes
         {
         }
 
+        //Генерация кода создания таблицы
+        //используемые настройки:
+        //settings.TableName
         public override void GenerateCreateStatement()
         {                        
             StringBuilder sb = new StringBuilder($"create table {settings.TableName}(");
@@ -33,7 +36,12 @@ namespace SqlFileImporter.Classes
             sb.Append(");");
             createStatement = sb.ToString();
         }
-
+        
+        //Генерация кода вставки данных в таблицу
+        //используемые настройки:
+        //settings.TableName
+        //settings.NumRowHeader
+        //settings.BatchSizeForInsertStatement
         public override void GenerateInsertStatement()
         {
             string insert_tmp = "";

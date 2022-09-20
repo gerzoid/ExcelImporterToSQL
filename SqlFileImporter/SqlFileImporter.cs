@@ -34,5 +34,10 @@ namespace SqlFileImporter
             importer.GenerateCreateStatement();
             importer.GenerateInsertStatement();
         }
+
+        public string ToSQL()
+        {
+            return importer.CreateStatement + "\r\n" + importer.InsertStatement;
+        }
     }
 }

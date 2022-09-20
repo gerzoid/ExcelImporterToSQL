@@ -23,7 +23,7 @@ namespace SqlFileImporter.Core
 
         protected Column[] columns;        
         protected FileImporter importer;
-
+        
         public ImporterAbstract(string fileName)
         {
             this.importFilename = fileName;
@@ -106,7 +106,10 @@ namespace SqlFileImporter.Core
             return new Column() { type = "nvarchar", size = stat.max_length };
         }
 
-
+        //TODO почему-то не всегда находится Char.IsPunctuation(d) в строке даты, выдает 0, хотя там две точки
+        //Заполнение типа колонок и их длинны исходя из анализа данных в столбцах
+        //используемые настройки:
+        //settings.UseTranslitHeader
         public void FillColumnsDefinition(int numHeaderRow, int CountRowForAnalyse=10)
         {
             int countColumns = importer.GetCountColumns();

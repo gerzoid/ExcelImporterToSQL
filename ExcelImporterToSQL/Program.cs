@@ -19,9 +19,7 @@ namespace ExcelImporterToSQL
 
             using (StreamWriter writer = new StreamWriter(@$"c:\dev\{importer.settings.TableName}.sql"))
             {
-                writer.WriteLine(importer.CreateStatement);
-                writer.WriteLine("");
-                writer.WriteLine(importer.InsertStatement);
+                importer.ToSQL();
             }
         }
 
