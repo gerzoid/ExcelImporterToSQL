@@ -29,11 +29,6 @@ namespace SqlFileImporter.Classes
             return workSheet.Dimension.End.Row-1;
         }
 
-        public override string GetNameColumn(int col)
-        {
-            return workSheet.Cells[numRowHeader+1, col+1].Value != null ? Convert.ToString(workSheet.Cells[numRowHeader+1, col+1].Value): "";
-        }
-
         public override string? GetValue(int row, int col)
         {
             return workSheet.Cells[row + 1, col+1].Value != null ? Convert.ToString(workSheet.Cells[row + 1, col+1].Value) : "";

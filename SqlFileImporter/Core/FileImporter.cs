@@ -15,7 +15,6 @@ namespace SqlFileImporter.Core
         {
             this.fileName = FileName;
         }
-        public abstract string GetNameColumn(int col);
         public abstract string? GetValue(int row, int col);
         
         public abstract IEnumerable<string> GetValues(int row, int col, int rowEnd, int colEnd);
