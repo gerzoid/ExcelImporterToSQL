@@ -22,11 +22,14 @@ namespace SqlFileImporter.Classes
         //Кол-во строк для пакетоной вставки (МС СКЛ = 1000)
         static int batchSizeForInsertStatement = 500;
 
+        static bool headerInFile = false;
+
+        public bool HeaderInFile { get => headerInFile; set => headerInFile = value; }
         public int BatchSizeForInsertStatement { get => batchSizeForInsertStatement; set => batchSizeForInsertStatement = value; }
         public string TableName { get => tableName; set => tableName = value; }
         public bool UseTranslitHeader { get => useTranslitHeader; set => useTranslitHeader = value; }
         public int CountRowsForAnalyseType { get => countRowsForAnalyseType; set => countRowsForAnalyseType = value; }
-        public int NumRowHeader { get => numRowHeader; set => numRowHeader = value; }
+        public int NumRowHeader { get => numRowHeader; set  { numRowHeader = value; numRowData = numRowHeader + 1; } }
         public int NumRowData { get => numRowData; set => numRowData = value; }
     }
 }

@@ -3,6 +3,7 @@ using SqlFileImporter.Core;
 using Microsoft.VisualBasic.FileIO;
 using System.Data;
 using System.Drawing;
+using SqlFileImporter.Core.Records;
 
 namespace SqlFileImporter.Classes
 {
@@ -30,18 +31,16 @@ namespace SqlFileImporter.Classes
 
         public override string? GetValue(int row, int col)
         {
-            return table.Rows[row][col] is null ? table.Rows[row][col].ToString() : "";
+            return table.Rows[row][col] is not null ? table.Rows[row][col].ToString() : "";
         }
 
-        public override IEnumerable<string> GetValues(int row, int col, int rowEnd, int colEnd)
+        public override IEnumerable<string> GetValues(int col, int startRow, int countRowForAnalyse)
         {
-            List<string> result = new List<string>();
-            while (col<=colEnd)
-            {
-                result.Concat(table.AsEnumerable().Select(s => s.Field<string>(col)).ToList());
-                col++;
-            }
-            return result;
+                var df = table.AsEnumerable().Select(x => x.Field<string>(col)).Skip(startRow).ToList();
+            return df;
+                //var y= result.Concat(table.AsEnumerable().Select(s => s.Field<string>(col)).ToList());
+                //col++;            
+                //return result;
             /*table.AsEnumerable().Where(d=>d[ Select()
             return workSheet.Cells[row+1, col+1, rowEnd+1, colEnd+1].Where(d => d.Value is not null).Select(d => (Convert.ToString(d.Value) ?? ""));*/
         }
@@ -49,16 +48,20 @@ namespace SqlFileImporter.Classes
         public CsvFileImporter(string FileName) :base(FileName)
         {
             parser = new TextFieldParser(this.fileName);
-            string[] colFields;
+            table = new DataTable();
+            parser.Delimiters = new string[] { ";" };
+            string[] colFields;            
             colFields = parser.ReadFields();
+            for (int i = 0; i < colFields.Length; i++)
+            {
+                DataColumn datecolumn = new DataColumn("column"+i);
+                datecolumn.AllowDBNull = true;
+                table.Columns.Add(datecolumn);
+            }
+            table.Rows.Add(colFields);
             while (!parser.EndOfData)
             {
-                foreach (string column in colFields)
-                {
-                    DataColumn datecolumn = new DataColumn(column);
-                    datecolumn.AllowDBNull = true;
-                    table.Columns.Add(datecolumn);
-                }
+                table.Rows.Add(parser.ReadFields());
             }            
 
         }

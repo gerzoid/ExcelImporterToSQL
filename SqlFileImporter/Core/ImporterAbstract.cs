@@ -31,6 +31,11 @@ namespace SqlFileImporter.Core
             {
                 importer = new ExcelFileImporter(importFilename);
             }
+            if (System.IO.Path.GetExtension(importFilename) == ".csv")
+            {
+                importer = new CsvFileImporter(importFilename);
+            }
+
         }
 
         //TODO нужно переделать на плагины
@@ -116,12 +121,12 @@ namespace SqlFileImporter.Core
             int countRows = importer.GetCountRows();
 
             if (countRows - numHeaderRow <= CountRowForAnalyse)
-                CountRowForAnalyse = countRows - numHeaderRow;
+                CountRowForAnalyse = countRows - settings.NumRowData;
 
             Console.WriteLine($"Всего колонок {countRows}, столбцов {countColumns}");
             columns = new Column[countColumns];
 
-            int countNoName = 1;
+            int countNoName = 1;           
 
             for (int i = 0; i < countColumns; i++)
             {
@@ -146,7 +151,8 @@ namespace SqlFileImporter.Core
 
                 //var value = workSheet.Cells[3, i, 10, i];
                 //var f = value.Select(d => (Convert.ToString(d.Value) ?? ""));
-                var values = importer.GetValues(numHeaderRow+1, i, CountRowForAnalyse, i);
+                var values = importer.GetValues(i, settings.NumRowData, CountRowForAnalyse);
+                //var values = importer.GetValues(i, numHeaderRow+1,  CountRowForAnalyse);
 
                 colStat.max_length = values.Max(d => d.Length);
                 colStat.max_count_letters = values.Select(d => d.ToCharArray().Where(d => Char.IsLetter(d)).Count()).Max(d => d);

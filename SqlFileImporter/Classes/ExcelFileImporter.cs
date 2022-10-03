@@ -34,9 +34,10 @@ namespace SqlFileImporter.Classes
             return workSheet.Cells[row + 1, col+1].Value != null ? Convert.ToString(workSheet.Cells[row + 1, col+1].Value) : "";
         }
 
-        public override IEnumerable<string> GetValues(int row, int col, int rowEnd, int colEnd)
+        public override IEnumerable<string> GetValues(int col, int  startRow, int countRowForAnalyse)
         {
-            return workSheet.Cells[row+1, col+1, rowEnd+1, colEnd+1].Where(d => d.Value is not null).Select(d => (Convert.ToString(d.Value) ?? ""));
+            int count_rows = countRowForAnalyse>GetCountRows() ? GetCountRows() : countRowForAnalyse;
+            return workSheet.Cells[startRow+1, col+1, count_rows, col+1].Where(d => d.Value is not null).Select(d => (Convert.ToString(d.Value) ?? ""));
         }
 
         public ExcelFileImporter(string FileName) :base(FileName)

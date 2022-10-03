@@ -17,7 +17,7 @@ namespace SqlFileImporter.Core
         }
         public abstract string? GetValue(int row, int col);
         
-        public abstract IEnumerable<string> GetValues(int row, int col, int rowEnd, int colEnd);
+        public abstract IEnumerable<string> GetValues(int col, int startRow, int countRowForAnalyse);
         public abstract int GetCountRows();
         public abstract int GetCountColumns();
         public abstract void CloseFile(string FileName);

@@ -58,7 +58,7 @@ namespace SqlFileImporter.Classes
             insert_tmp = sb.ToString();
 
             int cnt = 0;
-            for (int row = settings.NumRowHeader + 1; row <= importer.GetCountRows(); row++)
+            for (int row = settings.NumRowData; row < importer.GetCountRows(); row++)
             {
                  sb.Append( cnt!= 0 ? ",\r\n" : "").Append("(");
                 for (int col = 0; col < columns.Length; col++)
