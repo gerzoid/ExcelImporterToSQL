@@ -36,13 +36,7 @@ namespace SqlFileImporter.Classes
 
         public override IEnumerable<string> GetValues(int col, int startRow, int countRowForAnalyse)
         {
-                var df = table.AsEnumerable().Select(x => x.Field<string>(col)).Skip(startRow).ToList();
-            return df;
-                //var y= result.Concat(table.AsEnumerable().Select(s => s.Field<string>(col)).ToList());
-                //col++;            
-                //return result;
-            /*table.AsEnumerable().Where(d=>d[ Select()
-            return workSheet.Cells[row+1, col+1, rowEnd+1, colEnd+1].Where(d => d.Value is not null).Select(d => (Convert.ToString(d.Value) ?? ""));*/
+            return table.AsEnumerable().Select(x => x.Field<string>(col) ?? "").Skip(startRow).Take(countRowForAnalyse).ToList();
         }
 
         public CsvFileImporter(string FileName) :base(FileName)
