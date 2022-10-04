@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DbfDataReader" Version="0.8.0" />
     <PackageReference Include="EPPlus" Version="6.0.7" />
   </ItemGroup>
 
