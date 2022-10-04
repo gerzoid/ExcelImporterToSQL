@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqlFileImporter.Classes
+namespace SqlFileImporter.Classes.Importers
 {
     internal class ExcelFileImporter : FileImporter
     {
@@ -21,29 +21,29 @@ namespace SqlFileImporter.Classes
 
         public override int GetCountColumns()
         {
-            return workSheet.Dimension.End.Column-1;
+            return workSheet.Dimension.End.Column - 1;
         }
 
         public override int GetCountRows()
         {
-            return workSheet.Dimension.End.Row-1;
+            return workSheet.Dimension.End.Row - 1;
         }
 
         public override string? GetValue(int row, int col)
         {
-            return workSheet.Cells[row + 1, col+1].Value != null ? Convert.ToString(workSheet.Cells[row + 1, col+1].Value) : "";
+            return workSheet.Cells[row + 1, col + 1].Value != null ? Convert.ToString(workSheet.Cells[row + 1, col + 1].Value) : "";
         }
 
-        public override IEnumerable<string> GetValues(int col, int  startRow, int countRowForAnalyse)
+        public override IEnumerable<string> GetValues(int col, int startRow, int countRowForAnalyse)
         {
-            int count_rows = countRowForAnalyse>GetCountRows() ? GetCountRows() : countRowForAnalyse;
-            return workSheet.Cells[startRow+1, col+1, count_rows, col+1].Where(d => d.Value is not null).Select(d => (Convert.ToString(d.Value) ?? ""));
+            int count_rows = countRowForAnalyse > GetCountRows() ? GetCountRows() : countRowForAnalyse;
+            return workSheet.Cells[startRow + 1, col + 1, count_rows, col + 1].Where(d => d.Value is not null).Select(d => Convert.ToString(d.Value) ?? "");
         }
 
-        public ExcelFileImporter(string FileName) :base(FileName)
+        public ExcelFileImporter(string FileName) : base(FileName)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            excel = new ExcelPackage(this.fileName);
+            excel = new ExcelPackage(fileName);
             workSheet = excel.Workbook.Worksheets.First();
         }
     }

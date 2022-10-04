@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using SqlFileImporter.Core.Records;
 
-namespace SqlFileImporter.Classes
+namespace SqlFileImporter.Classes.Importers
 {
     internal class CsvFileImporter : FileImporter
     {
@@ -39,16 +39,16 @@ namespace SqlFileImporter.Classes
             return table.AsEnumerable().Select(x => x.Field<string>(col) ?? "").Skip(startRow).Take(countRowForAnalyse).ToList();
         }
 
-        public CsvFileImporter(string FileName) :base(FileName)
+        public CsvFileImporter(string FileName) : base(FileName)
         {
-            parser = new TextFieldParser(this.fileName);
+            parser = new TextFieldParser(fileName);
             table = new DataTable();
             parser.Delimiters = new string[] { ";" };
-            string[] colFields;            
+            string[] colFields;
             colFields = parser.ReadFields();
             for (int i = 0; i < colFields.Length; i++)
             {
-                DataColumn datecolumn = new DataColumn("column"+i);
+                DataColumn datecolumn = new DataColumn("column" + i);
                 datecolumn.AllowDBNull = true;
                 table.Columns.Add(datecolumn);
             }
@@ -56,7 +56,7 @@ namespace SqlFileImporter.Classes
             while (!parser.EndOfData)
             {
                 table.Rows.Add(parser.ReadFields());
-            }            
+            }
 
         }
     }

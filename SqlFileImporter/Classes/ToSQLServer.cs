@@ -7,9 +7,9 @@ using System.Xml.Linq;
 
 namespace SqlFileImporter.Classes
 {
-    internal class ImporterToSQLServer : ImporterAbstract
+    internal class ToSQLServer : Converter
     {
-        public ImporterToSQLServer(string importFilename) : base(importFilename)
+        public ToSQLServer(string importFilename) : base(importFilename)
         {
         }
 

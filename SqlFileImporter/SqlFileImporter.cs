@@ -11,7 +11,7 @@ namespace SqlFileImporter
 {
     public class SqlFileImport
     {
-        ImporterAbstract importer;
+        Converter importer;
         
         public Settings settings = new Settings();
         public string CreateStatement { get => importer.CreateStatement; }
@@ -21,7 +21,7 @@ namespace SqlFileImporter
             switch (_TO)
             {
                 case IMPORT_TO.SQLServer:
-                    importer = new ImporterToSQLServer(fileName);
+                    importer = new ToSQLServer(fileName);
                     break;
                 default: throw new NotImplementedException();
             }
