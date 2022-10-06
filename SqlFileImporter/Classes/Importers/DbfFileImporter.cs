@@ -31,8 +31,8 @@ namespace SqlFileImporter.Classes.Importers
         public override string? GetValue(int row, int col)
         {
             var dbfRecord = new DbfRecord(dbf);
-
-            //dbf.Stream.Seek()
+            
+            //dbf.Stream.see
             //return table.Rows[row][col] is not null ? table.Rows[row][col].ToString() : "";
             return null;
         }
@@ -42,7 +42,50 @@ namespace SqlFileImporter.Classes.Importers
             return null;
         }
 
-        public CsvFileImporter(string FileName) : base(FileName)
+        public override Column GetTypeColumn(ColumnStat stat, IEnumerable<string>? values)
+        {
+            Column column = new Column() { prec = 0, size = 0, type = "nvarchar" };
+            
+            switch (dbf.Columns[stat.indexColumn].ColumnType)
+            {
+                case DbfColumnType.Number: column.type = "numeric";
+                    column.size = dbf.Columns[stat.indexColumn].ColumnSize ?? 0;
+                    column.prec = dbf.Columns[stat.indexColumn].NumericPrecision ?? 0;
+                    break;
+                case DbfColumnType.Double:
+                    column.type = "numeric";
+                    column.size = dbf.Columns[stat.indexColumn].ColumnSize ?? 0;
+                    column.prec = dbf.Columns[stat.indexColumn].NumericPrecision ?? 0;
+                    break;
+                case DbfColumnType.SignedLong:
+                    column.type = "numeric";
+                    column.size = dbf.Columns[stat.indexColumn].ColumnSize ?? 0;
+                    column.prec = dbf.Columns[stat.indexColumn].NumericPrecision ?? 0;
+                    break;
+                case DbfColumnType.Currency: 
+                    column.type = "numeric";
+                    column.size = dbf.Columns[stat.indexColumn].ColumnSize ?? 0;
+                    column.prec = dbf.Columns[stat.indexColumn].NumericPrecision ?? 0;
+                    break;
+                case DbfColumnType.Float: column.type = "numeric";
+                    column.size = dbf.Columns[stat.indexColumn].ColumnSize ?? 0;
+                    column.prec = dbf.Columns[stat.indexColumn].NumericPrecision ?? 0;
+                    break;
+                case DbfColumnType.DateTime:
+                    column.type = "datetime";
+                    break;
+                case DbfColumnType.Date:
+                    column.type = "smalldatetime";
+                    break;
+                default:
+                    column.type = "nvarchar";
+                    break;
+
+            }
+            return column;
+        }
+
+        public DbfFileImporter(string FileName) : base(FileName)
         {
 
         }

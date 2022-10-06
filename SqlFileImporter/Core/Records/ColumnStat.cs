@@ -1,7 +1,8 @@
 ﻿namespace SqlFileImporter.Core.Records
 {
-    record ColumnStat
+    public record ColumnStat
     {
+        public int indexColumn;
         public int max_length;
         public int max_count_letters;
         public int max_count_numerics;

@@ -1,6 +1,6 @@
 ﻿namespace SqlFileImporter.Core.Records
 {
-        record Column
+        public record Column
         {
             public string name;
             public string type;

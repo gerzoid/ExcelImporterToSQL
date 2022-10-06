@@ -62,18 +62,18 @@ namespace SqlFileImporter.Core
 
             int countNoName = 1;
 
-            for (int i = 0; i < countColumns; i++)
+            for (int indexColumn = 0; indexColumn < countColumns; indexColumn++)
             {
                 Column tmp = new Column();
                 ColumnStat colStat = new ColumnStat();
                 //Название столбцов
-                if (importer.GetValue(numHeaderRow, i) == null || importer.GetValue(numHeaderRow, i) == "")
+                if (importer.GetValue(numHeaderRow, indexColumn) == null || importer.GetValue(numHeaderRow, indexColumn) == "")
                 {
                     tmp.name = "noname" + countNoName;
                     countNoName++;
                 }
                 else
-                    tmp.name = importer.GetValue(numHeaderRow, i);
+                    tmp.name = importer.GetValue(numHeaderRow, indexColumn);
 
                 if (settings.UseTranslitHeader)
                     tmp.name = translitter.Translit(tmp.name, TranslitMethods.TranslitType.Iso).Replace("'", "");  //хак с заменой мягкого знака
@@ -83,8 +83,9 @@ namespace SqlFileImporter.Core
                 if (cnt_exists_column > 0)
                     tmp.name = tmp.name + (cnt_exists_column + 1);
 
-                var values = importer.GetValues(i, settings.NumRowData, CountRowForAnalyse);
+                var values = importer.GetValues(indexColumn, settings.NumRowData, CountRowForAnalyse);
 
+                colStat.indexColumn = indexColumn;
                 colStat.max_length = values.Max(d => d.Length);
                 colStat.max_count_letters = values.Select(d => d.ToCharArray().Where(d => char.IsLetter(d)).Count()).Max(d => d);
                 colStat.max_count_numerics = values.Select(d => d.ToCharArray().Where(d => char.IsDigit(d)).Count()).Max(d => d);
@@ -96,7 +97,7 @@ namespace SqlFileImporter.Core
                 tmp.type = tmp2.type;
                 tmp.size = tmp2.size;
                 tmp.prec = tmp2.prec;
-                columns[i] = tmp;
+                columns[indexColumn] = tmp;
             }
         }
         public abstract void GenerateCreateStatement();

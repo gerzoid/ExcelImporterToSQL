@@ -22,6 +22,7 @@ namespace SqlFileImporter.Core
         public abstract int GetCountRows();
         public abstract int GetCountColumns();
         public abstract void CloseFile(string FileName);
+
         public virtual Column GetTypeColumn(ColumnStat stat, IEnumerable<string>? values)
         {
             {
@@ -95,6 +96,6 @@ namespace SqlFileImporter.Core
                 return new Column() { type = "nvarchar", size = stat.max_length };
             }
 
-
+        }
     }
 }
