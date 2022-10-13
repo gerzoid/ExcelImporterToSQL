@@ -7,11 +7,11 @@ namespace ExcelImporterToSQL
     {
         static void Main(string[] args)
         {
-            /*SqlFileImport importer = new SqlFileImport(@"c:\dev\pso.xlsx", SqlFileImporter.Enum.IMPORT_TO.SQLServer);
+            SqlFileImport importer = new SqlFileImport(@"c:\dev\exp.xlsx", SqlFileImporter.Enum.IMPORT_TO.SQLServer);
             importer.settings.NumRowHeader = 0;
             importer.settings.CountRowsForAnalyseType= 99999;
             importer.settings.UseTranslitHeader = true;
-            importer.settings.TableName = "pso";
+            importer.settings.TableName = "tmp_reexp";
             importer.Go();
             
             var s =importer.CreateStatement;
@@ -19,10 +19,10 @@ namespace ExcelImporterToSQL
 
             using (StreamWriter writer = new StreamWriter(@$"c:\dev\{importer.settings.TableName}.sql"))
             {
-                importer.ToSQL();
-            }*/
+                writer.Write(importer.ToSQL());
+            }
 
-            SqlFileImport importer = new SqlFileImport(@"d:\gerz\csv.csv", SqlFileImporter.Enum.IMPORT_TO.SQLServer);
+            /*SqlFileImport importer = new SqlFileImport(@"d:\gerz\csv.csv", SqlFileImporter.Enum.IMPORT_TO.SQLServer);
             importer.settings.HeaderInFile = true;
             importer.settings.NumRowHeader = 0;
             importer.settings.CountRowsForAnalyseType = 99999;
@@ -36,7 +36,7 @@ namespace ExcelImporterToSQL
                         using (StreamWriter writer = new StreamWriter(@$"c:\dev\{importer.settings.TableName}.sql"))
                         {
                             importer.ToSQL();
-                        }
+                        }*/
         }
 
     }

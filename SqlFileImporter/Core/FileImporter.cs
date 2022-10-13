@@ -74,7 +74,8 @@ namespace SqlFileImporter.Core
                         return new Column() { type = "smalldatetime", size = 0, prec = 0 };
                     }
                     //Дата и время
-                    if (stat.max_count_numerics == 14 && stat.max_count_punctuations == 2)
+                    //if (stat.max_count_numerics == 14 && stat.max_count_punctuations == 2)
+                    if (stat.max_count_numerics >= 13 && stat.max_count_punctuations >= 2)
                     {
                         byte cnt = 0;
                         DateTime result;

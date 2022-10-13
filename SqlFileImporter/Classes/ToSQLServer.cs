@@ -58,7 +58,7 @@ namespace SqlFileImporter.Classes
             insert_tmp = sb.ToString();
 
             int cnt = 0;
-            for (int row = settings.NumRowData; row < importer.GetCountRows(); row++)
+            for (int row = settings.NumRowData; row <= importer.GetCountRows(); row++)
             {
                  sb.Append( cnt!= 0 ? ",\r\n" : "").Append("(");
                 for (int col = 0; col < columns.Length; col++)
@@ -69,7 +69,7 @@ namespace SqlFileImporter.Classes
                     if (columns[col].type == "Numeric")
                     {
                         if (value != "")
-                            sb.Append(value);
+                            sb.Append(value.Replace(',','.'));
                         else
                             sb.Append("NULL");
                     }

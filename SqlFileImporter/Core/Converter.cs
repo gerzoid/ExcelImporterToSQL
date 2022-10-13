@@ -90,7 +90,7 @@ namespace SqlFileImporter.Core
                 colStat.max_count_letters = values.Select(d => d.ToCharArray().Where(d => char.IsLetter(d)).Count()).Max(d => d);
                 colStat.max_count_numerics = values.Select(d => d.ToCharArray().Where(d => char.IsDigit(d)).Count()).Max(d => d);
                 colStat.min_count_numerics = values.Select(d => d.ToCharArray().Where(d => char.IsDigit(d)).Count()).Max(d => d);
-                colStat.max_count_punctuations = values.Select(d => d.ToCharArray().Where(d => char.IsPunctuation(d)).Count()).Min(d => d);
+                colStat.max_count_punctuations = values.Select(d => d.ToCharArray().Where(d => char.IsPunctuation(d)).Count()).Max(d => d);
                 colStat.min_count_punctuations = values.Select(d => d.ToCharArray().Where(d => char.IsPunctuation(d)).Count()).Min(d => d);
 
                 Column tmp2 = importer.GetTypeColumn(colStat, values);
