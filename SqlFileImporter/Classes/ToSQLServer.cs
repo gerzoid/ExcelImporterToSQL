@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using Microsoft.Extensions.Primitives;
+using OfficeOpenXml;
 using OfficeOpenXml.Drawing.Slicer.Style;
 using SqlFileImporter.Core;
 using SqlFileImporter.Core.Records;
@@ -60,22 +61,31 @@ namespace SqlFileImporter.Classes
             int cnt = 0;
             for (int row = settings.NumRowData; row <= importer.GetCountRows(); row++)
             {
-                 sb.Append( cnt!= 0 ? ",\r\n" : "").Append("(");
+                sb.Append(cnt != 0 ? ",\r\n" : "").Append("(");
                 for (int col = 0; col < columns.Length; col++)
                 {
                     sb.Append(col > 0 && col != columns.Length ? ", " : "");
                     string value = importer.GetValue(row, col);
                     value = value.TrimEnd();
-                    if (columns[col].type == "Numeric")
+                    switch (columns[col].type)
                     {
-                        if (value != "")
-                            sb.Append(value.Replace(',','.'));
-                        else
-                            sb.Append("NULL");
+                        case "numeric":
+                            if (value != "")
+                                sb.Append(value.Replace(',', '.'));
+                            else
+                                sb.Append("NULL");
+                            break;
+                        case "date":
+                            sb.Append("'"+ Convert.ToDateTime(value).ToString("yyyy-dd-MM") + "'");
+                            break;
+                        case "datetime":
+                            sb.Append("'"+Convert.ToDateTime(value).ToString("yyyy-dd-MM HH:mm:ss") + "'");
+                            break;
+                        default:
+                            sb.Append($"'{value}'");
+                            break;
                     }
-                    else
-                        sb.Append($"'{value}'");
-                }                
+                }
                 cnt++;
                 sb.Append(")");
                 if (cnt >= settings.BatchSizeForInsertStatement)

@@ -39,7 +39,7 @@ namespace SqlFileImporter.Core
                         {
                             int size = values.Where(d => d.IndexOf(separator) > 0).Select(a => a.Substring(0, a.IndexOf(separator)).Length).Max();
                             int prec = values.Where(d => d.IndexOf(separator) > 0).Select(a => a.Substring(a.IndexOf(separator), a.Length - a.IndexOf(separator) - 1).Length).Max();
-                            return new Column() { type = "Numeric", size = size, prec = prec };
+                            return new Column() { type = "numeric", size = size, prec = prec };
                         }
                         else
                             return new Column() { type = "nvarchar", size = stat.max_length };
@@ -52,7 +52,7 @@ namespace SqlFileImporter.Core
                         if (cnt > 0)
                             return new Column() { type = "nvarchar", size = stat.max_length };
                         else
-                            return new Column() { type = "Numeric", size = stat.max_length };
+                            return new Column() { type = "numeric", size = stat.max_length };
                     }
 
                     //Даты
@@ -71,7 +71,7 @@ namespace SqlFileImporter.Core
                             if (cnt > 10)
                                 break;
                         }
-                        return new Column() { type = "smalldatetime", size = 0, prec = 0 };
+                        return new Column() { type = "date", size = 0, prec = 0 };
                     }
                     //Дата и время
                     //if (stat.max_count_numerics == 14 && stat.max_count_punctuations == 2)

@@ -7,11 +7,11 @@ namespace ExcelImporterToSQL
     {
         static void Main(string[] args)
         {
-            SqlFileImport importer = new SqlFileImport(@"c:\dev\exp.xlsx", SqlFileImporter.Enum.IMPORT_TO.SQLServer);
+            SqlFileImport importer = new SqlFileImport(@"c:\dev\tmp_dn_i.xlsx", SqlFileImporter.Enum.IMPORT_TO.SQLServer);
             importer.settings.NumRowHeader = 0;
             importer.settings.CountRowsForAnalyseType= 99999;
             importer.settings.UseTranslitHeader = true;
-            importer.settings.TableName = "tmp_reexp";
+            importer.settings.TableName = "tmp_dn_i";
             importer.Go();
             
             var s =importer.CreateStatement;
